@@ -1,0 +1,14 @@
+@extends('layouts.new-resource')
+
+@section('title', 'Create New Message')
+@section('index-url', route('message.index'))
+@section('store-url', route('message.store'))
+@section('new-form')
+    <x-input-select :collection="['Group', 'Normal']" title="Type : " oldValue="{{old('type')}}" name="type" ></x-input-select>
+    <x-input-select :collection="\App\Models\User::all()" title="From : " value="id" oldValue="{{old('from_id')}}" name="from_id" display="name"></x-input-select>
+    <x-input-select :collection="\App\Models\User::all()" title="To : " value="id" oldValue="{{old('to_id')}}" name="to_id" display="name"></x-input-select>
+    <x-input-select :collection="\App\Models\Group::all()" title="Group : " value="id" oldValue="{{old('group_id')}}" name="group_id" display="name"></x-input-select>
+    <x-input-long-text name="message" value="{{old('message')}}" title="Content:"></x-input-long-text>
+    <button id="submit-btn" type="submit" class="btn btn-primary float-right">Save</button>
+
+@endsection

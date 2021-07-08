@@ -1,0 +1,15 @@
+@extends('layouts.new-resource')
+@section('title', 'Edit Comment')
+@section('index-url', route('comment.index'))
+@section('store-url', route('comment.update', $comment))
+@section('new-form')
+    @method('PATCH')
+    <x-input-select :collection="\App\Models\User::all()" title="User" :oldValue="$comment['user_id']" name="user_id" display="name" value="id"></x-input-select>
+    <x-input-select :collection="\App\Models\Media::all()->groupBy('collection_name')->keys()" name="collection_name" title="Collection Name: " :oldValue="$comment['collection_name']"></x-input-select>
+    <x-input-long-text name="content" :value="$comment['content']" title="Comment"></x-input-long-text>
+    <x-input-file name="media" title="Video and images"></x-input-file>
+    <x-input-select :collection="\App\Models\FamilyBlog::all()" name="family_blog_id" title="Family Blog id: " display="id" :oldValue="$comment['family_blog_id']" value="id"></x-input-select>
+    <button id="submit-btn" type="submit" class="btn btn-primary float-right">Save</button>
+
+
+@endsection
